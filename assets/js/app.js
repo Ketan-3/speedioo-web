@@ -43,6 +43,8 @@ const I = {
   camera: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M4 7h4l2-3h4l2 3h4v13H4z"/><circle cx="12" cy="13" r="4"/></svg>',
   star: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="m12 3 2.7 5.8 6.3.7-4.7 4.3 1.3 6.2L12 17l-5.6 3 1.3-6.2L3 9.5l6.3-.7z"/></svg>'
 };
+const TYRE = '<svg class="tyre" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.6" fill="none" stroke="currentColor" stroke-width="3.6" stroke-dasharray="5.4 1.1"/><path d="M12 6.2V17.8M7 9.1l10 5.8M17 9.1l-10 5.8" stroke="currentColor" stroke-width="1.2"/><circle cx="12" cy="12" r="2.4" fill="currentColor"/></svg>';
+const LOGO = `<span class="mark">S</span><span class="wm">speed<b>i</b><span class="tyres">${TYRE}${TYRE}</span></span>`;
 const ico = (n, s = 18) => I[n].replace('<svg', `<svg width="${s}" height="${s}" aria-hidden="true"`);
 
 /* ---------- state ---------- */
@@ -196,6 +198,12 @@ function renderHome() {
    <div class="how-grid rv"><div class="gauge-box">${gaugeSVG()}</div><ol class="how-steps" id="howSteps"></ol></div>
   </div></section>
 
+  <section class="sec sx-sec"><div class="wrap">
+   <div class="sec-head rv"><div><span class="eyebrow">Watch it happen</span><h2>A 28-minute sale, in 20 seconds</h2></div><a class="btn btn-red" href="#sell">Sell my bike</a></div>
+   <div id="storyAnim" class="rv"></div>
+   <p class="fine" style="margin-top:10px">Illustrative story. The price shown is an example; your price depends on your bike.</p>
+  </div></section>
+
   <section class="sec"><div class="wrap">
    <div class="sec-head rv"><div><span class="eyebrow">Ownership services</span><h2>Everything after the purchase</h2></div></div>
    <div class="svc rv">
@@ -247,13 +255,14 @@ function renderHome() {
   </div></section>`;
 
   setupVideo($('#heroVid'), MEDIA.hero);
+  window.SpeediooStory && SpeediooStory.mount($('#storyAnim'));
   setupVideo($('#storyVid'), MEDIA.story, { autoplay: false });
   drawHow();
   if (!reduceMotion && $('.rot')) every(() => { const w = $$('.rot-in span'); if (!w.length) return; const i = w.findIndex(x => x.classList.contains('on')); w.forEach(x => x.classList.remove('out')); w[i].classList.replace('on', 'out'); w[(i + 1) % w.length].classList.add('on'); }, 2200);
   const box = $('.gauge-box');
   if (box && 'IntersectionObserver' in window && !reduceMotion) {
     let vis = false; new IntersectionObserver(([e]) => vis = e.isIntersecting, { threshold: .4 }).observe(box);
-    every(() => { if (vis && !S.howPinned) { S.howStep = (S.howStep + 1) % 4; drawHow(); } }, 3200);
+    every(() => { if (vis && !S.howPinned) { S.howStep = (S.howStep + 1) % 4; drawHow(); } }, 1700);
   }
 }
 const HOW = {
@@ -301,7 +310,7 @@ function filterSync(f, city = S.city) {
   return BIKES.filter(b => b.city === city && b.price >= f.minPrice && b.price <= f.maxPrice && (!f.brands.length || f.brands.includes(b.brand)) && (!f.minYear || b.year >= f.minYear) && (!f.maxKm || b.km < f.maxKm) && (!f.types.length || f.types.includes(b.type)) && (!f.owners.length || f.owners.includes(b.owners)));
 }
 function heroFilter() { const f = defF(), b = $('#hb').value; if (b) { const [a, c] = b.split('-'); f.minPrice = +a; f.maxPrice = +c; } if ($('#hbr').value) f.brands = [$('#hbr').value]; if ($('#ht').value) f.types = [$('#ht').value]; if ($('#hk').value) f.maxKm = +$('#hk').value; return f; }
-function plate(id, val = '') { return `<div class="plate"><span class="ind"><i>●</i>IND</span><input id="${id}" value="${esc(val)}" placeholder="MH 12 AB 1234" autocomplete="off" maxlength="13" aria-label="Registration number"></div>`; }
+function plate(id, val = '') { return `<div class="plate"><span class="ind"><i>●</i>IND</span><input id="${id}" value="${esc(val)}" placeholder="MH 12 AB 1234" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" enterkeyhint="go" maxlength="13" aria-label="Registration number"></div>`; }
 function shopTiles() {
   const inCity = BIKES.filter(b => b.city === S.city);
   if (S.shop === 'budget') return `<div class="tiles">${BUDGETS.map((b, i) => `<button class="tile" data-act="shop" data-k="budget" data-v="${i}">${b[0]}<small>${inCity.filter(x => x.price >= b[1] && x.price <= b[2]).length} bikes</small></button>`).join('')}</div>`;
@@ -472,7 +481,8 @@ function renderSell() {
     <div class="qform" id="qform" aria-live="polite"></div>
    </div></div></section>
    <div class="wrap">
-   <section class="sec"><div class="sec-head rv"><h2>How selling works</h2></div>
+   <section class="sec"><div class="sec-head rv"><div><span class="eyebrow">Watch it happen</span><h2>A 28-minute sale, in 20 seconds</h2></div></div><div id="storyAnim" class="rv"></div></section>
+   <section class="sec" style="padding-top:0"><div class="sec-head rv"><h2>How selling works</h2></div>
     <div class="steps4 rv">${HOW.sell.map((s, i) => `<div class="step-c"><span class="n">${i + 1}</span><strong>${s[0]}</strong><span class="muted" style="font-size:var(--fs-sm)">${s[1]}</span></div>`).join('')}</div></section>
    <section class="sec two" style="padding-top:0">
     <div class="panel rv"><span class="eyebrow">Documents checklist</span><ul class="doclist" id="docList">${['RC (original)', 'Valid insurance', 'PUC', 'Aadhaar / PAN', 'NOC if a loan was taken'].map((d, i) => `<li><label><input type="checkbox" data-doc="${i}" ${DB.get('docs', [])[i] ? 'checked' : ''}> ${d}</label></li>`).join('')}</ul><span class="hint">Tick what you have ready. We'll remind you about the rest.</span></div>
@@ -481,6 +491,7 @@ function renderSell() {
    </section></div>`;
   if (S.sell.step === 4 && !S.sell.est) S.sell.step = 3;
   renderQ();
+  window.SpeediooStory && SpeediooStory.mount($('#storyAnim'));
 }
 function renderQ() {
   const s = S.sell, el = $('#qform'); if (!el) return;
@@ -615,7 +626,7 @@ const mhead = t => `<div class="m-head"><h2>${t}</h2><button class="close" data-
 const okBox = (title, msg, extra = '') => `<div class="ok-box"><span class="big">✓</span><strong style="font-size:var(--fs-lg)">${title}</strong><p class="muted">${msg}</p>${extra}</div>`;
 
 function openDrawer() {
-  layer(`<div class="drawer-top"><a href="#home" class="logo"><span class="mark">S</span><span>speed<b>ioo</b></span></a><button class="icon-btn dark close" data-act="closeL" aria-label="Close menu">${I.x}</button></div>
+  layer(`<div class="drawer-top"><a href="#home" class="logo" aria-label="Speedioo home">${LOGO}</a><button class="icon-btn dark close" data-act="closeL" aria-label="Close menu">${I.x}</button></div>
    <button class="login-card" data-act="account"><span class="av">${S.user ? esc(S.user.name[0]) : ico('user', 22)}</span><span style="flex:1">${S.user ? `<strong>Hi, ${esc(S.user.name)}</strong><small>My account</small>` : '<strong style="font-size:20px">Log in / Sign up</strong><small>Mobile OTP · 10 seconds</small>'}</span>›</button>
    <nav class="dnav"><a href="#buy" data-act="reset-buy">${I.bike}${t('buy')} now</a><a href="#sell">${I.tag}${t('sell')} now</a><a href="#about">${I.user}${t('about')}</a><a href="#contact">${I.phone}Contact us</a><a href="#blog">${I.guide}${t('blog')}</a><a class="small" href="#" data-act="shortlist">${I.heart}My shortlist · My test rides</a></nav>
    <div class="drow"><span class="eyebrow">Language</span><div class="chips">${[['en', 'EN'], ['hi', 'हिंदी'], ['mr', 'मराठी']].map(([k, l]) => `<button class="chip ${S.lang === k ? 'on' : ''}" data-act="lang" data-v="${k}">${l}</button>`).join('')}</div></div>
@@ -1046,6 +1057,8 @@ function drawAcc() { $('#accBtn').innerHTML = S.user ? `<span class="acc-i">${es
 $('#burger').innerHTML = I.menu; $$('.sIcon').forEach(s => s.outerHTML = I.search); $$('.mic').forEach(m => m.outerHTML = `<span class="mic-i">${I.mic}</span>`);
 $('#bn1').innerHTML = I.home + 'Home'; $('#bn2').innerHTML = I.bike + 'Buy'; $('#bn3').innerHTML = I.tag + 'Sell'; $('#bn4').innerHTML = I.phone + 'Call'; $('#bn5').innerHTML = I.wa + 'WhatsApp';
 $('#chatFab').innerHTML = I.chat + '<span>Ask Speedioo</span>'; $('#waFab').innerHTML = I.wa;
+$$('.logo').forEach(l => l.innerHTML = LOGO);
+(() => { const force = /[?&]intro\b/.test(location.search); if ((force || !DB.get('logoIntro', 0)) && !reduceMotion) { const l = $('#hdr .logo'); l.classList.add('intro'); setTimeout(() => l.classList.remove('intro'), 2200); DB.set('logoIntro', 1); } })();
 $$('.cityName').forEach(e => e.textContent = S.city);
 $('#yr') && ($('#yr').textContent = new Date().getFullYear());
 if (DB.get('ribbonOff', 0)) $('#ribbon')?.remove();
