@@ -14,7 +14,9 @@ Opening `index.html` directly from disk also works.
 1. Push this folder to a GitHub repo.
 2. In Vercel: **Add New → Project → Import** the repo.
 3. Framework preset: **Other**. Build command: *(empty)*. Output directory: `.` (root).
-4. Deploy. `vercel.json` adds caching and security headers.
+4. Deploy. `vercel.json` adds security headers and tells browsers to re-check files on every visit, so a new deploy shows up immediately.
+
+**Releasing a change:** bump the `?v=` number on the CSS/JS links in `index.html` (and `version` in `package.json`) so phones never mix old and new files.
 
 CLI alternative: `npm i -g vercel && vercel` (then `vercel --prod`).
 
