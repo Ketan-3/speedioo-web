@@ -26,12 +26,16 @@ CLI alternative: `npm i -g vercel && vercel` (then `vercel --prod`).
 | `assets/js/data.js` | Sample inventory, media URLs, FAQs, reviews, contact details |
 | `assets/js/api.js` | **API layer.** Promise-based mocks for every backend call + GA4 `dataLayer` events |
 | `assets/js/app.js` | Hash router, pages, interactions, chatbot v1 |
+| `assets/js/story.js` | 20-second animated story "Sold in 28 minutes" (SVG, scrubbable, used on Home and Sell) |
+| `assets/video/speedioo-sold-in-28-minutes.mp4` | The same story exported as a 1280×720 MP4 for WhatsApp / ads |
 | `#leads` route | Team demo inbox of everything the forms captured in this browser, with CSV export |
 
 ## Pages and flows that work now
 Home (video hero, Buy/Sell finder, brand marquee, shop-by, fresh arrivals, speedometer "how it works", services, rider-story video, reviews, FAQ, WhatsApp opt-in) · Buy listing (filters, sort, quick view, compare, request a bike) · Bike detail (gallery + lightbox, inspection report, specs, test ride, reserve, EMI) · Sell (3-step quote, OTP, photo upload, estimate, slot booking, tracker, referral) · About / reviews / team / contact · Blog · Search (typo-tolerant, "under 1 lakh", voice placeholder) · OTP login + account (shortlist, test rides, sell requests) · Hindi / Marathi switch · Chat assistant (scripted v1).
 
 Demo OTP: any 4 digits.
+
+Logo intro: first-time visitors see the two tyre "oo"s roll in from the right. Add `?intro` to the URL to replay it.
 
 ## Connecting the backend (ERPNext)
 Set `API_BASE` in `assets/js/api.js` and replace each mock body with a `fetch()`; function names map 1:1 to endpoints
