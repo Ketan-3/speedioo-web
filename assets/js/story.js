@@ -27,14 +27,14 @@
     <g id="${wa}">${wheel(80, 142)}</g><g id="${wb}">${wheel(242, 142)}</g>
     <path d="M80 142 L132 104 L198 104 L242 142" stroke="#1A1717" stroke-width="6" fill="none" stroke-linejoin="round"/>
     <rect x="132" y="106" width="56" height="32" rx="6" fill="#5F5858"/>
-    <path d="M118 84 Q140 66 190 72 L204 92 L148 100 Z" fill="${tone}"/>${logo ? '<text x="-163" y="90" transform="scale(-1 1)" fill="#FFFFFF" font-size="15" font-weight="700" font-style="italic" font-family="IBM Plex Sans, sans-serif">S</text>' : ''}
+    <path d="M118 84 Q140 66 190 72 L204 92 L148 100 Z" fill="${tone}"/>${logo ? '<text x="-163" y="90" transform="scale(-1 1)" fill="#FFFFFF" font-size="15" font-weight="700" font-style="italic" font-family="Inter, sans-serif">S</text>' : ''}
     <path d="M92 88 L150 94 L146 104 L88 100 Z" fill="#1A1717"/>
     <path d="M242 142 L212 70" stroke="#1A1717" stroke-width="7" stroke-linecap="round"/>
     <path d="M202 62 L230 58" stroke="#1A1717" stroke-width="6" stroke-linecap="round"/>
     <circle cx="222" cy="82" r="10" fill="#FFFFFF" stroke="#1A1717" stroke-width="4"/>`;
   const tyre = id => `<g id="${id}"><circle r="22" fill="none" stroke="#D7141A" stroke-width="8" stroke-dasharray="9 2.5"/><path d="M0 -15V15M-13 -7.5L13 7.5M13 -7.5L-13 7.5" stroke="#D7141A" stroke-width="2.2"/><circle r="5" fill="#D7141A"/></g>`;
   const checks = ['Engine & gearbox', 'Brakes & suspension', 'Tyres & wheels', 'RC & documents'];
-  const F = 'font-family="IBM Plex Sans, system-ui, sans-serif"', M = 'font-family="IBM Plex Mono, ui-monospace, monospace"';
+  const F = 'font-family="Inter, system-ui, sans-serif"', M = 'font-family="Inter, system-ui, sans-serif"';
 
   const svg = `<svg class="sx-svg" viewBox="0 0 1280 720" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Animated story: a customer sells his bike to Speedioo in 28 minutes">
    <rect width="1280" height="720" fill="#F6F4F4"/>
@@ -43,7 +43,7 @@
     <path d="M28 252 L170 186 L312 252" fill="none" stroke="#1A1717" stroke-width="6" stroke-linejoin="round"/>
     <g fill="#F1EDED" stroke="#E0D9D9" stroke-width="2"><rect x="70" y="290" width="70" height="56"/><rect x="200" y="290" width="70" height="56"/><rect x="70" y="372" width="70" height="56"/><rect x="200" y="372" width="70" height="56"/></g>
     <rect x="140" y="452" width="60" height="108" fill="#1A1717"/><circle cx="188" cy="508" r="4" fill="#D7141A"/>
-    <text x="60" y="244" ${M} font-size="15" fill="#5F5858" letter-spacing="2">BANER, PUNE</text></g>
+    <text x="60" y="244" ${M} font-size="15" fill="#5F5858" letter-spacing="0">Baner, Pune</text></g>
    <rect y="560" width="1280" height="160" fill="#E6E0E0"/><line x1="0" y1="640" x2="1280" y2="640" stroke="#FFFFFF" stroke-width="6" stroke-dasharray="44 30"/>
    <g id="sx-sellerbike" transform="translate(300 377) scale(1.05)">${bike('#5F5858', 'sw1', 'sw2')}</g>
    <rect id="sx-scanglow" x="340" y="430" width="40" height="132" fill="#D7141A" opacity="0"/>
@@ -63,7 +63,7 @@
    </g>
    <g id="sx-wind" opacity="0" stroke="#B9B1B1" stroke-width="4" stroke-linecap="round"><line x1="0" y1="430" x2="70" y2="430"/><line x1="20" y1="470" x2="110" y2="470"/><line x1="0" y1="510" x2="60" y2="510"/></g>
    <g id="sx-checkwrap" transform="translate(0 30)"><g id="sx-check" opacity="0"><rect x="360" y="70" width="340" height="232" rx="18" fill="#0F0E0E"/>
-    <text x="386" y="110" ${M} font-size="14" fill="#B9B1B1" letter-spacing="2">DOORSTEP INSPECTION</text>
+    <text x="386" y="110" ${M} font-size="14" fill="#B9B1B1" letter-spacing="0">Doorstep inspection</text>
     ${checks.map((c, i) => `<g id="sx-r${i}"><circle cx="398" cy="${148 + i * 40}" r="13" fill="none" stroke="#5F5858" stroke-width="2.5"/><path d="M391 ${148 + i * 40} l5 5 l10 -11" stroke="#FFFFFF" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0"/><text x="424" y="${154 + i * 40}" ${F} font-size="18" fill="#FFFFFF">${c}</text></g>`).join('')}</g></g>
    <g id="sx-sold" opacity="0"><g transform="translate(470 452) rotate(-12)"><rect x="-96" y="-32" width="192" height="64" rx="8" fill="#FFFFFF" stroke="#D7141A" stroke-width="5"/><text x="0" y="13" text-anchor="middle" ${F} font-size="34" font-weight="700" fill="#D7141A" letter-spacing="6">SOLD</text></g></g>
    <g id="sx-phone" transform="translate(0 640)">
@@ -72,16 +72,16 @@
      <text x="1022" y="174" ${F} font-size="19" font-weight="600" fill="#1A1717">Sell your bike</text>
      <rect x="1020" y="192" width="186" height="50" rx="8" fill="#FFFFFF" stroke="#0F0E0E" stroke-width="3"/><rect x="1020" y="192" width="26" height="50" rx="6" fill="#0F0E0E"/><text x="1033" y="223" ${F} font-size="8" font-weight="700" fill="#FFFFFF" text-anchor="middle">IND</text>
      <text id="sx-plate" x="1054" y="225" ${M} font-size="17" font-weight="500" fill="#1A1717" letter-spacing="1"></text><rect id="sx-caret" x="1054" y="207" width="2" height="22" fill="#D7141A"/>
-     <text x="1022" y="272" ${M} font-size="11" fill="#5F5858" letter-spacing="1">KM DRIVEN</text><rect x="1020" y="280" width="74" height="28" rx="14" fill="#0F0E0E"/><text x="1057" y="299" ${F} font-size="12" fill="#FFFFFF" text-anchor="middle">10–25k</text>
+     <text x="1022" y="272" ${M} font-size="11" fill="#5F5858" letter-spacing="0">KM driven</text><rect x="1020" y="280" width="74" height="28" rx="14" fill="#0F0E0E"/><text x="1057" y="299" ${F} font-size="12" fill="#FFFFFF" text-anchor="middle">10–25k</text>
      <g id="sx-btn1"><rect x="1020" y="324" width="186" height="46" rx="10" fill="#D7141A"/><text x="1113" y="353" ${F} font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle">Get price →</text></g>
-     <g id="sx-est" opacity="0"><rect x="1020" y="386" width="186" height="118" rx="12" fill="#0F0E0E"/><text x="1036" y="414" ${M} font-size="11" fill="#B9B1B1" letter-spacing="1">YOUR ESTIMATE</text><text x="1036" y="450" ${F} font-size="24" font-weight="600" fill="#FFFFFF">₹1.62L –</text><text x="1036" y="480" ${F} font-size="24" font-weight="600" fill="#FFFFFF">₹1.80L</text></g>
+     <g id="sx-est" opacity="0"><rect x="1020" y="386" width="186" height="118" rx="12" fill="#0F0E0E"/><text x="1036" y="414" ${M} font-size="11" fill="#B9B1B1" letter-spacing="0">Your estimate</text><text x="1036" y="450" ${F} font-size="24" font-weight="600" fill="#FFFFFF">₹1.62L –</text><text x="1036" y="480" ${F} font-size="24" font-weight="600" fill="#FFFFFF">₹1.80L</text></g>
     </g>
     <g id="sx-s2" opacity="0">
-     <text x="1022" y="174" ${M} font-size="12" fill="#5F5858" letter-spacing="1">FINAL OFFER</text>
+     <text x="1022" y="174" ${M} font-size="12" fill="#5F5858" letter-spacing="0">Final offer</text>
      <text x="1022" y="214" ${F} font-size="32" font-weight="600" fill="#1A1717">₹1,72,000</text>
      <text x="1022" y="240" ${F} font-size="13" fill="#5F5858">Fixed price · no haggling</text>
      <g id="sx-acc"><rect x="1020" y="258" width="186" height="46" rx="10" fill="#D7141A"/><text x="1113" y="287" ${F} font-size="16" font-weight="600" fill="#FFFFFF" text-anchor="middle">Accept offer</text></g>
-     <text x="1022" y="336" ${M} font-size="11" fill="#5F5858" letter-spacing="1">E-SIGN DOCUMENTS</text>
+     <text x="1022" y="336" ${M} font-size="11" fill="#5F5858" letter-spacing="0">E-sign documents</text>
      <rect x="1020" y="346" width="186" height="110" rx="10" fill="#F6F4F4" stroke="#E3DEDE" stroke-width="2"/>
      <path id="sx-sig" d="M1036 420 C1050 380 1062 380 1060 418 C1058 440 1074 396 1088 404 C1100 412 1094 430 1110 414 C1124 400 1132 426 1146 410 C1160 396 1172 420 1190 408" fill="none" stroke="#0F0E0E" stroke-width="3.2" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/>
      <line x1="1032" y1="436" x2="1194" y2="436" stroke="#B9B1B1" stroke-width="1.5"/>

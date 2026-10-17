@@ -101,7 +101,7 @@ function card(b, o = {}) {
    <button class="tool fav-m ${fav ? 'on' : ''}" data-act="fav" data-id="${b.id}" aria-label="Shortlist ${esc(b.name)}">${I.heart}</button>
    <h3>${esc(b.name)}</h3>
    <div class="facts"><span>${b.year}</span><span>${kmf(b.km)}</span><span>${own(b.owners)}</span>${o.city ? `<span>${b.city}</span>` : ''}</div>
-   <div class="card-foot"><strong class="price">${inr(b.price)}</strong><span class="emi">EMI ${inr(emi(b.price))}/mo*</span>
+   <div class="card-foot"><strong class="price">${inr(b.price)}</strong><span class="emi">EMI ${inr(emi(b.price))}/mo</span>
    ${o.compare ? `<label class="cmp"><input type="checkbox" data-cmp="${b.id}" ${S.compare.includes(b.id) ? 'checked' : ''}> Compare</label>` : ''}</div>
   </div></article>`;
 }
@@ -167,7 +167,6 @@ function renderHome() {
     </div>
    </div>
    <button class="vid-ctl" data-act="vidtoggle" aria-label="Pause background video">${I.pause}</button>
-   <span class="credit">${MEDIA.hero.credit}</span>
   </section>
 
   <div class="trust-wrap"><div class="wrap"><div class="trust rv">
@@ -189,7 +188,6 @@ function renderHome() {
    <div class="sec-head rv"><div><span class="eyebrow">Newly added</span><h2>Fresh arrivals in ${S.city}</h2></div>
     <div class="rail-ctl"><button class="tool" data-act="rail" data-d="-1" aria-label="Scroll left">${I.left}</button><button class="tool" data-act="rail" data-d="1" aria-label="Scroll right">${I.right}</button><a class="link-arrow" href="#buy" data-act="reset-buy">View all ${pool.length} →</a></div></div>
    ${pool.length ? `<div class="rail" id="freshRail">${pool.map(b => card(b)).join('')}</div>` : `<div class="empty"><strong>No listings in ${S.city} yet.</strong><button class="btn btn-red" data-act="request">Request a bike</button></div>`}
-   <p class="fine" style="margin-top:12px">*EMI is illustrative: 20% down, 12% p.a., 36 months. Final rate from the lender.</p>
   </div></section>
 
   <section class="sec how-sec"><div class="wrap">
@@ -201,7 +199,6 @@ function renderHome() {
   <section class="sec sx-sec"><div class="wrap">
    <div class="sec-head rv"><div><span class="eyebrow">Watch it happen</span><h2>A 28-minute sale, in 20 seconds</h2></div><a class="btn btn-red" href="#sell">Sell my bike</a></div>
    <div id="storyAnim" class="rv"></div>
-   <p class="fine" style="margin-top:10px">Illustrative story. The price shown is an example; your price depends on your bike.</p>
   </div></section>
 
   <section class="sec"><div class="wrap">
@@ -209,10 +206,10 @@ function renderHome() {
    <div class="svc rv">
     <button data-act="emi">${I.card}EMI calculator</button>
     <button data-act="rc">${I.route}RC transfer status</button>
-    <button data-act="toast" data-msg="Insurance renewal opens in Phase 3">${I.shield}Insurance<span class="soon">Soon</span></button>
-    <button data-act="toast" data-msg="Challan check opens in Phase 3">${I.alert}Challan check<span class="soon">Soon</span></button>
-    <button data-act="toast" data-msg="Service booking opens in Phase 3">${I.wrench}Service booking<span class="soon">Soon</span></button>
-    <button data-act="toast" data-msg="Accessories store is planned for Phase 2">${I.bag}Accessories<span class="soon">Soon</span></button>
+    <button data-act="toast" data-msg="Insurance renewal is coming soon">${I.shield}Insurance<span class="soon">Soon</span></button>
+    <button data-act="toast" data-msg="Challan check is coming soon">${I.alert}Challan check<span class="soon">Soon</span></button>
+    <button data-act="toast" data-msg="Service booking is coming soon">${I.wrench}Service booking<span class="soon">Soon</span></button>
+    <button data-act="toast" data-msg="Accessories store is coming soon">${I.bag}Accessories<span class="soon">Soon</span></button>
    </div>
   </div></section>
 
@@ -225,8 +222,7 @@ function renderHome() {
    <div class="story-vid rv">
     <video id="storyVid" playsinline preload="none" aria-label="Customer story video"></video>
     <button class="story-play" data-act="story" aria-label="Play customer story">${I.play}</button>
-    <span class="story-cap"><b>Rider stories</b> · <span class="ph-w">[replace with a 30-sec Speedioo customer video]</span></span>
-    <span class="credit">${MEDIA.story.credit}</span>
+    <span class="story-cap"><b>Rider stories</b></span>
    </div>
    <div class="stats rv">
     <div><strong data-count="30" data-suf=" min">30 min</strong><span>From offer to UPI payout</span></div>
@@ -250,7 +246,7 @@ function renderHome() {
   </div></section>
 
   <section class="wa-band"><div class="wrap rv">
-   <div><h2>Price drops and new arrivals, on WhatsApp</h2><p class="fmuted">One message a week. Stop any time. The Speedioo app is <span class="ph-w">[coming soon]</span>.</p></div>
+   <div><h2>Price drops and new arrivals, on WhatsApp</h2><p class="fmuted">One message a week. Stop any time. The Speedioo app is coming soon.</p></div>
    <form data-form="waOpt" novalidate class="wa-form"><label class="sr" for="waMob">Mobile number</label><input id="waMob" class="input" inputmode="numeric" maxlength="10" placeholder="Mobile number"><button class="btn btn-red" type="submit">${ico('wa', 18)} Notify me</button></form>
   </div></section>`;
 
@@ -285,7 +281,7 @@ function drawHow() {
   box.innerHTML = steps.map((s, k) => `<li class="${k === i ? 'on' : ''} ${k < i ? 'done' : ''}"><button data-act="howstep" data-i="${k}" aria-pressed="${k === i}"><span class="n">${k + 1}</span><span><strong>${s[0]}</strong><span>${s[1]}</span></span></button></li>`).join('') +
     `<li class="how-cta">${S.how === 'sell' ? '<a class="btn btn-red" href="#sell">Get my price</a>' : '<a class="btn btn-red" href="#buy" data-act="reset-buy">Browse bikes</a>'}</li>`;
   const svg = $('.gauge'); svg.style.setProperty('--a', (135 + 270 * frac) + 'deg'); svg.style.setProperty('--p', 100 - frac * 100);
-  $('#gNum').textContent = `${i + 1}/4`; $('#gLab').textContent = steps[i][0].toUpperCase();
+  $('#gNum').textContent = `${i + 1}/4`; $('#gLab').textContent = steps[i][0];
   $$('.g-stop').forEach(g => g.classList.toggle('lit', +g.dataset.i <= i));
 }
 function heroPane() {
@@ -344,7 +340,6 @@ function renderBuy() {
     <div class="fsheet-foot"><button class="btn btn-red btn-block" data-act="fclose" id="fShow">Show bikes</button></div>
    </aside>
    <div style="min-width:0"><div id="results"><div class="grid">${'<div class="card skel"></div>'.repeat(6)}</div></div>
-    <p class="fine" style="margin-top:12px">*EMI is illustrative: 20% down, 12% p.a., 36 months.</p>
     <div class="note-card"><div><strong>Didn't find your bike?</strong><p class="muted">Tell us what you want and we'll call when it arrives.</p></div><button class="btn btn-black" data-act="request">Request a bike</button></div>
    </div>
   </div></div>`;
@@ -415,7 +410,7 @@ function renderDetail(id) {
      <div>${I.torque}<strong>${b.nm} Nm</strong><span>Torque</span></div>
      <div>${I.drop}<strong>${b.tank ? b.tank + ' L' : '—'}</strong><span>Fuel tank</span></div>
      <div>${I.odo}<strong>${kmf(b.km)}</strong><span>Driven</span></div>
-    </div><p class="fine">Spec values are manufacturer figures for this model. Confirm against your catalogue per bike.</p></section>
+    </div></section>
 
    <section class="vsec" id="v-desc"><h2><span class="n">2</span>Description</h2>
     <p>Speedioo's take: ridden in ${b.city} city by its ${own(b.owners).replace(' owner', '')} owner, ${kmf(b.km)} on the clock, registered ${b.reg}. Serviced at <span class="ph">[authorised centre]</span>, colour <span class="ph">[colour]</span>, mods <span class="ph">[none / list]</span>.</p></section>
@@ -423,7 +418,7 @@ function renderDetail(id) {
    <section class="vsec" id="v-report"><h2><span class="n">3</span>Inspection report</h2>
     <div class="insp"><div class="insp-head"><span class="muted" style="font-size:var(--fs-sm)">Checked at our ${HUBS[b.city]} hub by <span class="ph">[inspector]</span></span><span class="score"><span class="score-bar" style="--s:${b.score * 10}%"></span>${b.score}/10</span></div>
      <div class="insp-grid">${insp.map(([k, v]) => `<div class="insp-item">${k}<span class="verdict ${/Minor/.test(v) ? 'warn' : ''}">${v}</span></div>`).join('')}</div>
-     <div class="insp-links"><button data-act="lightbox">See photos of every flagged item</button><button data-act="toast" data-msg="Full PDF report downloads from the CDN once inspections are uploaded">Download full report (PDF)</button><button data-act="chatask" data-q="Explain the inspection report for ${esc(b.name)}">Explain this report in plain words</button></div></div></section>
+     <div class="insp-links"><button data-act="lightbox">See photos of every flagged item</button><button data-act="toast" data-msg="We'll share the full report on WhatsApp">Download full report (PDF)</button><button data-act="chatask" data-q="Explain the inspection report for ${esc(b.name)}">Explain this report in plain words</button></div></div></section>
 
    <section class="vsec" id="v-specs"><h2><span class="n">4</span>Full specifications</h2>
     <div class="spec"><div class="spec-tabs">${Object.keys(specs).map((k, i) => `<button class="chip ${i ? '' : 'on'}" data-act="spectab" data-k="${i}">${k}</button>`).join('')}</div>
@@ -439,7 +434,7 @@ function renderDetail(id) {
       <div>${I.shield}<strong>[Warranty]</strong><small>[— months, engine]</small></div>
       <div>${I.gift}<strong>[Accessory]</strong><small>[Phone mount / cover / lock]</small></div>
      </div>
-     <div class="addons"><span><strong>Add-ons</strong> · Extended warranty · Saddle bags · Crash guard</span><button class="textbtn" style="padding:0" data-act="toast" data-msg="Add-ons store is planned for Phase 2">View add-ons</button></div>
+     <div class="addons"><span><strong>Add-ons</strong> · Extended warranty · Saddle bags · Crash guard</span><button class="textbtn" style="padding:0" data-act="toast" data-msg="Add-ons are coming soon">View add-ons</button></div>
     </div></section>
 
    <section class="vsec"><h2>Similar bikes around ${lakh(b.price)}</h2>
@@ -447,17 +442,17 @@ function renderDetail(id) {
   </div>
   <aside id="dDecide"></aside>
   </div></div>
-  <div class="dbar"><div class="p"><strong>${inr(b.price)}</strong><span class="emi">EMI ${emiV}/mo*</span></div><a class="btn btn-line" href="https://wa.me/${CONTACT.wa}?text=${encodeURIComponent('Hi Speedioo, I am interested in the ' + b.name + ' (' + b.year + ', ' + inr(b.price) + ')')}" target="_blank" rel="noopener">WhatsApp</a><button class="btn btn-red" data-act="ride" data-id="${b.id}">Test ride</button></div>`;
+  <div class="dbar"><div class="p"><strong>${inr(b.price)}</strong><span class="emi">EMI ${emiV}/mo</span></div><a class="btn btn-line" href="https://wa.me/${CONTACT.wa}?text=${encodeURIComponent('Hi Speedioo, I am interested in the ' + b.name + ' (' + b.year + ', ' + inr(b.price) + ')')}" target="_blank" rel="noopener">WhatsApp</a><button class="btn btn-red" data-act="ride" data-id="${b.id}">Test ride</button></div>`;
   const decide = `<div class="decide"><span class="eyebrow">${esc(b.brand)}</span><h1>${esc(b.model)}</h1>
     <div class="facts"><span>${b.year}</span><span>${kmf(b.km)}</span><span>${own(b.owners)}</span><span>${b.cc ? 'Petrol' : 'Electric'}</span><span>${b.reg}</span></div>
     <strong class="price">${inr(b.price)}</strong>
-    <span class="save-line">New on-road ≈ <span class="ph">[₹—]</span> · You save <span class="ph">[₹—]</span> · Fixed price, no haggling</span>
-    <div class="emi-box"><span>EMI from <strong>${emiV}</strong>/mo*</span><button data-act="emi" data-price="${b.price}">Calculate</button></div>
+    <span class="save-line">New on-road ≈ ${inr(b.onRoad)} · <b>You save ${inr(b.onRoad - b.price)}</b></span>
+    <div class="emi-box"><span>EMI from <strong>${emiV}</strong>/mo</span><button data-act="emi" data-price="${b.price}">Calculate</button></div>
     <button class="btn btn-red btn-block" data-act="ride" data-id="${b.id}">Book free test ride</button>
     <div class="two-btn"><a class="btn btn-line" href="tel:${CONTACT.tel}">Call</a><a class="btn btn-line" href="https://wa.me/${CONTACT.wa}?text=${encodeURIComponent('Hi Speedioo, I am interested in the ' + b.name + ' (' + b.year + ')')}" target="_blank" rel="noopener">WhatsApp</a></div>
     <div class="two-btn"><button class="btn btn-line btn-sm" data-act="fav" data-id="${b.id}">${fav ? '♥ Saved' : '♡ Save'}</button><button class="btn btn-line btn-sm" data-act="reserve" data-id="${b.id}">Reserve with token</button></div>
     <a href="#sell" class="link-arrow" style="justify-self:start;font-size:var(--fs-sm)">Have an old bike? Exchange it →</a>
-    <p class="fine">Inspected · RC transfer included · ${b.area}, ${b.city}<br>*Illustrative: 20% down, 12% p.a., 36 months.</p></div>`;
+    <p class="fine">Inspected · RC transfer included · ${b.area}, ${b.city}</p></div>`;
   const place = () => { const m = isMobile(); $('#dDecide').innerHTML = m ? '' : decide; $('#mDecide').innerHTML = m ? decide : ''; };
   place(); S._place = place;
   setLD({ '@context': 'https://schema.org', '@type': 'Motorcycle', name: b.name, brand: { '@type': 'Brand', name: b.brand }, model: b.model, vehicleModelDate: String(b.year), mileageFromOdometer: { '@type': 'QuantitativeValue', value: b.km, unitCode: 'KMT' }, image: PEXELS_IMG(b.photo, 1200), offers: { '@type': 'Offer', price: b.price, priceCurrency: 'INR', availability: 'https://schema.org/InStock', areaServed: b.city } });
@@ -507,9 +502,8 @@ function renderQ() {
     : `<div class="field"><label for="sReg">Registration number</label>${plate('sReg', s.reg)}<span class="hint">We auto-fill brand, model and year from this. <button data-act="noreg">Don't have it?</button></span></div>`}
    <span class="err" id="eReg" hidden></span>
    <div class="field"><span class="lab">KM driven</span><div class="chips">${kms.map(k => `<button class="chip ${s.km === k ? 'on' : ''}" data-act="sv" data-k="km" data-v="${k}">${k}</button>`).join('')}</div><span class="err" id="eKm" hidden>Pick a range.</span></div>
-   <button class="btn btn-black btn-block" data-act="s1">Continue →</button>
-   <p class="fine">Step 2: Owners · Condition (3 taps) — Step 3: Name · Mobile (OTP) → Estimated price + slot booking</p>`;
-  else if (s.step === 2) el.innerHTML = `${prog}<strong>Step 2 of 3 · Condition</strong><p class="hint">${esc(s.noReg ? [s.brand, s.model, s.year].join(' ') : s.reg)} · ${s.km} km${s.noReg ? '' : ' · <span class="ph">[brand, model, year from Vahan lookup]</span>'}</p>
+   <button class="btn btn-black btn-block" data-act="s1">Continue →</button>`;
+  else if (s.step === 2) el.innerHTML = `${prog}<strong>Step 2 of 3 · Condition</strong><p class="hint">${esc(s.noReg ? [s.brand, s.model, s.year].join(' ') : s.reg)} · ${s.km} km</p>
    ${qRow('Owners', 'owners', ['1st', '2nd', '3rd+'], s.owners)}
    ${qRow('Does it start easily?', 'start', ['Yes', 'Sometimes', 'No'], s.cond.start)}
    ${qRow('Any accident damage?', 'acc', ['None', 'Minor', 'Major'], s.cond.acc)}
@@ -521,7 +515,7 @@ function renderQ() {
   else if (s.step === 3) el.innerHTML = `${prog}<strong>Step 3 of 3 · See your price</strong>
    <div class="field"><label for="sName">Name</label><input class="input" id="sName" value="${esc(s.name || S.user?.name || '')}" autocomplete="name"></div>
    <div class="field"><label for="sMob">Mobile number</label><input class="input" id="sMob" value="${esc(s.mobile || S.user?.mobile || '')}" inputmode="numeric" maxlength="10" placeholder="98XXX XXXXX" autocomplete="tel"></div>
-   ${s.otp ? `<div class="field"><label for="sOtp">OTP sent to +91 ${esc(s.mobile)}</label><input class="input otp" id="sOtp" inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="one-time-code"><span class="hint">Demo build: any 4 digits. <button data-act="resend">Resend</button></span></div>` : ''}
+   ${s.otp ? `<div class="field"><label for="sOtp">OTP sent to +91 ${esc(s.mobile)}</label><input class="input otp" id="sOtp" inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="one-time-code"><span class="hint"><button data-act="resend">Resend</button></span></div>` : ''}
    <label class="consent"><input type="checkbox" id="sCons" checked> I agree to Speedioo contacting me about this sale on call, SMS or WhatsApp. Privacy policy applies.</label>
    <span class="err" id="e3" hidden></span>
    <div class="two-btn"><button class="btn btn-line" data-act="sback">Back</button><button class="btn btn-red" data-act="s3" id="s3Btn">${s.otp ? 'Verify & see price' : 'Send OTP'}</button></div>
@@ -530,7 +524,7 @@ function renderQ() {
     if (!s.est) { el.innerHTML = `<strong>Working out your price…</strong><div class="est est-load"><span class="shimmer"></span><span class="fine">Checking model, year, km and condition</span></div>`; return; }
     const days = nextDays();
     el.innerHTML = `<strong>Hi ${esc(s.name.split(' ')[0])}, here's your estimate</strong>
-   <div class="est"><span class="eyebrow on-dark">${esc(s.noReg ? s.brand + ' ' + s.model : s.reg)} · ${s.km} km · ${s.owners} owner</span><strong><span id="estLo">${inr(s.est.lo)}</span> – <span id="estHi">${inr(s.est.hi)}</span></strong><span class="fine">Demo range. The live estimate comes from the valuation API. Final price is fixed after inspection.</span></div>
+   <div class="est"><span class="eyebrow on-dark">${esc(s.noReg ? s.brand + ' ' + s.model : s.reg)} · ${s.km} km · ${s.owners} owner</span><strong><span id="estLo">${inr(s.est.lo)}</span> – <span id="estHi">${inr(s.est.hi)}</span></strong><span class="fine">Final price is fixed after the free inspection.</span></div>
    <strong>Book your free inspection</strong>
    <div class="seg"><button class="${s.where === 'Home' ? 'on' : ''}" data-act="sv" data-k="where" data-v="Home">At my home</button><button class="${s.where === 'Hub' ? 'on' : ''}" data-act="sv" data-k="where" data-v="Hub">At ${HUBS[S.city]} hub</button></div>
    <div class="field"><span class="lab">Date</span><div class="chips">${days.map(d => `<button class="chip ${s.date === d ? 'on' : ''}" data-act="sv" data-k="date" data-v="${d}">${d}</button>`).join('')}</div></div>
@@ -554,10 +548,8 @@ function renderAbout() {
   <section class="sec vsec" id="story"><div class="about-hero">
    <div class="rv"><span class="eyebrow">Company</span><h1 style="margin-top:8px">Making used two-wheelers simple, honest and fast.</h1>
     <p class="muted" style="margin-top:14px;max-width:60ch">The used two-wheeler market runs on guesswork and paperwork headaches. We inspect every vehicle, fix the price up front, and take full responsibility for the RC transfer, so buyers and sellers are free of legal loose ends.</p>
-    <p class="fine" style="margin-top:10px">Since <span class="ph">[year]</span> · Baner, Pune · Mission · Why we started · What makes us different</p>
-    <div class="stats-sm"><div><strong class="ph">[n]+</strong><span>Bikes sold</span></div><div><strong class="ph">[n]+</strong><span>Happy sellers</span></div><div><strong>★ <span class="ph">[4.x]</span></strong><span>Google rating</span></div></div>
-    <p class="fine" style="margin-top:8px">Show real numbers only. Leave a stat out until you have it.</p></div>
-   <div class="photo-ph rv">${sceneImg(MEDIA.blog[1], 'Rider on a forest road', 1200)}<span>[Replace with team photo at the Baner office]</span></div></div></section>
+    <div class="stats-sm"><div><strong class="ph">[n]+</strong><span>Bikes sold</span></div><div><strong class="ph">[n]+</strong><span>Happy sellers</span></div><div><strong>★ <span class="ph">[4.x]</span></strong><span>Google rating</span></div></div></div>
+   <div class="photo-ph rv">${sceneImg(MEDIA.blog[1], 'Rider on a forest road', 1200)}</div></div></section>
 
   <section class="sec vsec" id="reviews" style="padding-top:0"><div class="sec-head"><h2>What riders say</h2><div class="chips" id="revF">${['All', 'Buyers', 'Sellers', 'Videos'].map((k, i) => `<button class="chip ${i ? '' : 'on'}" data-act="revf" data-v="${k}">${k}</button>`).join('')}</div></div>
    <div class="rating-bar"><strong>★ <span class="ph">[4.x]</span></strong><span class="muted">from <span class="ph">[N]</span> Google reviews</span><a href="https://www.google.com/maps/search/Speedioo+Baner+Pune" target="_blank" rel="noopener" class="link-arrow" style="margin-left:auto">Write a review on Google</a></div>
@@ -565,8 +557,7 @@ function renderAbout() {
     <div class="rev" data-kind="Video"><div class="video" role="button" tabindex="0" data-act="playmodal" data-v="story"><img src="${MEDIA.story.poster}" alt="" loading="lazy" onerror="this.remove()"><span>${I.play}</span></div><strong>Video: <span class="ph">[Customer]</span> sells Pulsar in 30 min</strong></div></div></section>
 
   <section class="sec vsec" id="team" style="padding-top:0"><div class="sec-head"><h2>The people behind Speedioo</h2></div>
-   <div class="team">${['Founder & CEO', 'Head of Inspections', 'Sales Advisor', 'Customer Care'].map(r => `<div class="person rv"><div class="pp">${ico('user', 48)}</div><div class="b"><strong class="ph" style="justify-self:start">[Name]</strong><small>${r}</small><small>[1-line bio: years with bikes]</small><a href="https://www.linkedin.com/" target="_blank" rel="noopener" style="font-size:var(--fs-xs)">LinkedIn</a></div></div>`).join('')}</div>
-   <p class="fine" style="margin-top:10px">Real faces of inspectors and advisors build trust in a category known for shady dealers.</p></section>
+   <div class="team">${['Founder & CEO', 'Head of Inspections', 'Sales Advisor', 'Customer Care'].map(r => `<div class="person rv"><div class="pp">${ico('user', 48)}</div><div class="b"><strong class="ph" style="justify-self:start">[Name]</strong><small>${r}</small><small>[1-line bio: years with bikes]</small><a href="https://www.linkedin.com/" target="_blank" rel="noopener" style="font-size:var(--fs-xs)">LinkedIn</a></div></div>`).join('')}</div></section>
 
   <section class="sec vsec" id="contact" style="padding-top:0"><div class="contact">
    <form class="qform" data-form="contact" novalidate id="cForm"><span class="eyebrow">Contact us</span><h2 style="font-size:var(--fs-xl)">Send us your enquiry</h2>
@@ -592,7 +583,7 @@ function renderBlog(cat = 'All') {
   $('#app').innerHTML = `<div class="wrap"><div class="crumb"><a href="#home">Home</a> / Blog</div>
   <div class="list-head"><h1>Riding guides &amp; selling tips</h1></div>
   <div class="chips" style="margin-bottom:18px">${['All', 'Buying', 'Selling', 'Ownership'].map(c => `<button class="chip ${c === cat ? 'on' : ''}" data-act="blogcat" data-v="${c}">${c}</button>`).join('')}</div>
-  <div class="posts">${GUIDES.map((g, i) => g.c === cat || cat === 'All' ? `<button class="post rv" data-act="post" data-i="${i}"><div class="cover">${sceneImg(MEDIA.blog[i % MEDIA.blog.length], '', 800)}<span>${g.c}</span></div><div class="b"><span class="eyebrow">${g.c} · ${g.m} min read</span><strong>${g.t}</strong><span class="muted" style="font-size:var(--fs-sm)">Existing post, migrated with its URL kept for SEO.</span></div></button>` : '').join('')}</div></div>`;
+  <div class="posts">${GUIDES.map((g, i) => g.c === cat || cat === 'All' ? `<button class="post rv" data-act="post" data-i="${i}"><div class="cover">${sceneImg(MEDIA.blog[i % MEDIA.blog.length], '', 800)}<span>${g.c}</span></div><div class="b"><span class="eyebrow">${g.c} · ${g.m} min read</span><strong>${g.t}</strong></div></button>` : '').join('')}</div></div>`;
 }
 
 /* ---------- LEAD INBOX (team demo) ---------- */
@@ -647,7 +638,7 @@ function drawQV() {
     <div class="dots">${VIEWS.map((_, i) => `<i class="${i === S.qv.ph ? 'on' : ''}"></i>`).join('')}</div></div>
    <div style="display:grid;gap:12px;align-content:start"><span class="eyebrow">${esc(b.brand)}</span><h2 style="font-size:var(--fs-xl);margin-top:-8px">${esc(b.model)}</h2>
     <div class="facts"><span>${b.year}</span><span>${kmf(b.km)}</span><span>${own(b.owners)}</span><span>${b.reg}</span></div>
-    <div><strong class="price" style="font-size:30px">${inr(b.price)}</strong><div class="emi">EMI from ${inr(emi(b.price))}/mo* · Fixed price, no haggling</div></div>
+    <div><strong class="price" style="font-size:30px">${inr(b.price)}</strong><div class="emi">EMI from ${inr(emi(b.price))}/mo</div><div class="save-line">New on-road ≈ ${inr(b.onRoad)} · <b>You save ${inr(b.onRoad - b.price)}</b></div></div>
     <div class="hl"><div>${I.engine}<strong>${b.cc ? b.cc + ' cc' : '2.9 kWh'}</strong><span>${b.cc ? 'Engine' : 'Battery'}</span></div><div>${I.fuel}<strong><span class="ph">[—]</span></strong><span>${b.cc ? 'Mileage' : 'Range'}</span></div><div>${I.gauge}<strong>${b.bhp} bhp</strong><span>Power</span></div></div>
     <a class="btn btn-black btn-block" href="#bike-${b.id}">View full details &amp; report →</a>
     <div class="act3"><a class="btn btn-line btn-sm" href="tel:${CONTACT.tel}">Call</a><a class="btn btn-line btn-sm" href="https://wa.me/${CONTACT.wa}?text=${encodeURIComponent('Hi Speedioo, I am interested in the ' + b.name)}" target="_blank" rel="noopener">WhatsApp</a><button class="btn btn-line btn-sm" data-act="fav" data-id="${b.id}">${fav ? '♥ Saved' : '♡ Save'}</button></div>
@@ -660,13 +651,13 @@ function openLightbox() {
   layer(`<div class="lb"><div class="lb-top"><span id="lbN">${S.gal + 1} / ${VIEWS.length} · ${VIEWS[S.gal].l}</span><button class="close lb-close" data-act="closeL" aria-label="Close">${I.x}</button></div>
    <div class="lb-img" id="lbImg">${photo(b, { view: S.gal, eager: true, sizes: '100vw' })}</div>
    <button class="lb-nav l" data-act="lbstep" data-d="-1" aria-label="Previous photo">${I.left}</button><button class="lb-nav r" data-act="lbstep" data-d="1" aria-label="Next photo">${I.right}</button>
-   <p class="lb-cap">Detail crops of the listing photo. Inspector photos of every flagged item appear here once uploaded.</p></div>`, 'lightbox', 'Photo viewer');
+   </div>`, 'lightbox', 'Photo viewer');
 }
 function lbStep(d) { const b = byId(S.detailId); setGal(S.gal + d); $('#lbImg').innerHTML = photo(b, { view: S.gal, eager: true, sizes: '100vw' }); $('#lbN').textContent = `${S.gal + 1} / ${VIEWS.length} · ${VIEWS[S.gal].l}`; }
 
 function openVideo(key, title) {
   const m = MEDIA[key];
-  layer(`${mhead(title)}<div class="m-body"><video controls playsinline autoplay poster="${m.poster}" class="modal-vid">${m.sources.map(s => `<source src="${s}" type="video/mp4">`).join('')}Your browser can't play this video.</video><p class="fine">${m.credit}. <span class="ph">[Replace with Speedioo's own footage]</span></p></div>`, 'modal', title);
+  layer(`${mhead(title)}<div class="m-body"><video controls playsinline autoplay poster="${m.poster}" class="modal-vid">${m.sources.map(s => `<source src="${s}" type="video/mp4">`).join('')}Your browser can't play this video.</video></div>`, 'modal', title);
 }
 
 function openSearch(q = '') {
@@ -741,16 +732,16 @@ function openReserve(id) {
   layer(`${mhead('Reserve this bike')}<div class="m-body" id="rsvBody">
    <div class="who"><span class="ride-thumb">${photo(b, { sizes: '100px' })}</span><div><strong>${esc(b.name)}</strong><div class="muted tnum">${inr(b.price)}</div></div></div>
    <p>Pay a refundable token of <span class="ph">₹[token]</span> to hold this bike for <span class="ph">[48 hours]</span>. It's adjusted against the price, or refunded if you don't buy.</p>
-   <button class="btn btn-red btn-block" data-act="pay" data-id="${b.id}">Pay token with UPI</button><p class="fine">Payment gateway (Razorpay / Cashfree) connects here.</p></div>`, 'modal narrow', 'Reserve');
+   <button class="btn btn-red btn-block" data-act="pay" data-id="${b.id}">Pay token with UPI</button></div>`, 'modal narrow', 'Reserve');
 }
 function openEMI(price = 200000) {
   layer(`${mhead('EMI calculator')}<div class="m-body">
    <div class="field"><label for="ePrice">Bike price</label><input type="range" id="ePrice" min="30000" max="500000" step="5000" value="${price}"><span class="range-lab"><span>₹30K</span><strong id="ePriceV" class="tnum"></strong><span>₹5L</span></span></div>
    <div class="field"><label for="eDown">Down payment</label><input type="range" id="eDown" min="10" max="60" step="5" value="20"><span class="range-lab"><span>10%</span><strong id="eDownV" class="tnum"></strong><span>60%</span></span></div>
    <div class="field"><span class="lab">Tenure</span><div class="chips" id="eTen">${[12, 24, 36, 48].map(n => `<button class="chip ${n === 36 ? 'on' : ''}" data-act="eten" data-v="${n}">${n} months</button>`).join('')}</div></div>
-   <div class="field"><label for="eRate">Interest rate (% p.a.)</label><input class="input" id="eRate" type="number" step="0.5" value="12" inputmode="decimal"><span class="hint">Placeholder rate. Real offers come from <span class="ph">[lender names]</span>.</span></div>
+   <div class="field"><label for="eRate">Interest rate (% p.a.)</label><input class="input" id="eRate" type="number" step="0.5" value="12" inputmode="decimal"></div>
    <div class="est"><span class="eyebrow on-dark">Estimated EMI</span><strong id="eOut"></strong><span class="fine" id="eSub"></span><span class="emi-split"><i id="eBarP"></i><i id="eBarI"></i></span><span class="fine"><b class="key-p">■</b> Principal <b class="key-i">■</b> Interest</span></div>
-   <button class="btn btn-red btn-block" data-act="toast" data-msg="Finance application opens in Phase 2">Check eligibility</button></div>`, 'modal narrow', 'EMI calculator');
+   <button class="btn btn-red btn-block" data-act="toast" data-msg="Finance application is coming soon">Check eligibility</button></div>`, 'modal narrow', 'EMI calculator');
   S._ten = 36; calcEMI();
 }
 function calcEMI() {
@@ -765,7 +756,7 @@ function openLogin() {
    <p class="muted">No passwords. We'll send a one-time code to your mobile.</p>
    <div class="field"><label for="lName">Name</label><input class="input" id="lName" autocomplete="name"></div>
    <div class="field"><label for="lMob">Mobile number</label><input class="input" id="lMob" inputmode="numeric" maxlength="10" placeholder="98XXX XXXXX" autocomplete="tel"></div>
-   <div class="field" id="lOtpF" hidden><label for="lOtp">Enter OTP</label><input class="input otp" id="lOtp" inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="one-time-code"><span class="hint">Demo build: any 4 digits.</span></div>
+   <div class="field" id="lOtpF" hidden><label for="lOtp">Enter OTP</label><input class="input otp" id="lOtp" inputmode="numeric" maxlength="4" placeholder="••••" autocomplete="one-time-code"></div>
    <label class="consent"><input type="checkbox" id="lCons" checked> I agree to the Terms and Privacy policy, and to receive updates on WhatsApp/SMS. I can withdraw consent any time.</label>
    <span class="err" id="eL" hidden></span>
    <button class="btn btn-red btn-block" type="submit" id="lBtn">Send OTP</button></form>`, 'modal narrow', 'Log in');
@@ -777,7 +768,7 @@ function openAccount(tab = 'shortlist') {
     shortlist: sl.length ? `<div class="acc-list">${sl.map(b => `<button class="srow" data-act="go" data-v="bike-${b.id}"><span class="thumb">${photo(b, { sizes: '80px' })}</span><span class="t"><strong>${esc(b.name)}</strong><span class="muted">${b.year} · ${kmf(b.km)} · ${b.city}</span></span><strong>${lakh(b.price)}</strong></button>`).join('')}</div><p class="fine">We'll alert you on WhatsApp if any of these drop in price.</p>` : '<p class="muted">Tap ♡ on any bike to save it here. We\'ll alert you if the price drops.</p>',
     rides: rides.length ? rides.map(r => `<div class="panel"><strong>${esc(byId(r.bikeId)?.name || '')}</strong><span class="muted">${r.date}, ${r.slot} · ${r.where === 'Home' ? 'At home' : 'At hub'} · ${r.id}</span></div>`).join('') : '<p class="muted">No test rides booked yet.</p>',
     sells: sells.length ? sells.map(r => `<div class="panel"><strong>${esc(r.vehicle)}</strong><span class="muted">Inspection ${r.date}, ${r.slot} · ${r.id}</span><ol class="track"><li class="done">Inspection booked</li><li>Final offer</li><li>UPI payment</li><li>RC transfer</li></ol></div>`).join('') : '<p class="muted">No sell requests yet. <a href="#sell">Get your price</a>.</p>',
-    garage: `<div class="panel" style="background:var(--surface)"><strong>My Garage · Phase 2</strong><span class="muted" style="font-size:var(--fs-sm)">Your bike's current value, service reminders, insurance and PUC expiry, and challans, in one place.</span></div>`
+    garage: `<div class="panel" style="background:var(--surface)"><strong>My Garage · coming soon</strong><span class="muted" style="font-size:var(--fs-sm)">Your bike's current value, service reminders, insurance and PUC expiry, and challans, in one place.</span></div>`
   };
   layer(`${mhead('Hi, ' + esc(S.user.name))}<div class="m-body"><div class="tabs">${[['shortlist', 'Shortlist (' + sl.length + ')'], ['rides', 'Test rides'], ['sells', 'Sell requests'], ['garage', 'My Garage']].map(([k, l]) => `<button class="${tab === k ? 'on' : ''}" data-act="acctab" data-v="${k}">${l}</button>`).join('')}</div>${body[tab]}<button class="textbtn" data-act="logout" style="justify-self:start">Log out</button></div>`, 'modal narrow', 'Account');
 }
@@ -794,7 +785,7 @@ const CH = { msgs: [], ctx: null, lang: 'en' };
 const GREET = { en: "Hi! I'm Speedioo's assistant. I can find you a bike, start your selling price, book an inspection or test ride, or check an RC transfer.", hi: 'नमस्ते! मैं Speedioo असिस्टेंट हूँ। बाइक ढूँढना, बेचने का दाम, इंस्पेक्शन या टेस्ट राइड बुक करना, मैं मदद कर सकता हूँ।', mr: 'नमस्कार! मी Speedioo सहाय्यक आहे. बाइक शोधणे, विक्रीची किंमत, तपासणी किंवा टेस्ट राइड बुक करणे, मी मदत करू शकतो.' };
 const QR = { en: ['Commuter under 80k in Pune', 'Sell my bike', 'EMI on 2 lakh', 'RC transfer status', 'Talk to a human'], hi: ['पुणे में 80k तक बाइक', 'मेरी बाइक बेचनी है', 'इंसान से बात करें'], mr: ['पुण्यात 80k पर्यंत बाइक', 'माझी बाइक विकायची आहे', 'माणसाशी बोला'] };
 function openChat(q) {
-  if (!CH.msgs.length) CH.msgs.push({ r: 'sys', h: 'Chats are stored to help with your request · DPDPA consent applies' }, { r: 'bot', h: GREET[CH.lang] });
+  if (!CH.msgs.length) CH.msgs.push({ r: 'sys', h: 'Chats are saved to help with your request' }, { r: 'bot', h: GREET[CH.lang] });
   let c = $('#chat');
   if (!c) { c = document.createElement('div'); c.id = 'chat'; c.className = 'chat'; c.setAttribute('role', 'dialog'); c.setAttribute('aria-label', 'Speedioo assistant'); document.body.appendChild(c); track('chat_open'); }
   c.innerHTML = `<div class="chat-h"><div class="row"><div class="who"><span class="av">S</span><div><strong>Speedioo Assistant</strong><small><span class="live"></span> Replies instantly · people 10am–8pm</small></div></div><button class="close" data-act="chatclose" aria-label="Close chat">${I.x}</button></div>
@@ -813,8 +804,8 @@ function chatSend(text) {
 const miniList = l => `<div class="mini">${l.map(b => `<button data-act="go" data-v="bike-${b.id}"><span class="mini-ph">${photo(b, { sizes: '60px' })}</span><span>${esc(b.name)}<br><span class="muted">${b.year} · ${kmf(b.km)} · ${b.area}</span></span><b>${lakh(b.price)}</b></button>`).join('')}</div>`;
 function botReply(raw) {
   const q = raw.toLowerCase();
-  if (CH.ctx === 'sellReg' && regOk(raw)) { CH.ctx = null; Object.assign(S.sell, { step: 1, reg: normReg(raw), noReg: false, done: false }); return `Got it: <b>${esc(normReg(raw))}</b>. I don't quote prices in chat because they must come from our valuation system. I've filled your number into the 60-second price form.<div class="mini"><button data-act="go" data-v="sell"><span>Continue to your price</span><b>→</b></button></div>`; }
-  if (CH.ctx === 'status') { CH.ctx = null; return `Thanks. I can't see live status in this build. Once connected I'll call <code>rcStatus</code> and show each step. I'm handing you to a person with this conversation attached.<div class="mini"><button data-act="handoff"><span>Connect to a person</span><b>→</b></button></div>`; }
+  if (CH.ctx === 'sellReg' && regOk(raw)) { CH.ctx = null; Object.assign(S.sell, { step: 1, reg: normReg(raw), noReg: false, done: false }); return `Got it: <b>${esc(normReg(raw))}</b>. I've filled your number into the 60-second price form.<div class="mini"><button data-act="go" data-v="sell"><span>Continue to your price</span><b>→</b></button></div>`; }
+  if (CH.ctx === 'status') { CH.ctx = null; return `Thanks. I'm handing you to a person who can check the status, with this conversation attached.<div class="mini"><button data-act="handoff"><span>Connect to a person</span><b>→</b></button></div>`; }
   if (/human|agent|person|call me|इंसान|माणस/.test(q)) return handoffMsg();
   if (/sell|बेच|विक/.test(q)) { CH.ctx = 'sellReg'; return 'Happy to help you sell. What is the registration number? (e.g. MH 12 AB 1234)'; }
   if (/\brc\b|transfer|status|order|track/.test(q)) { CH.ctx = 'status'; return 'Please share your request ID, or the registration number of the bike.'; }
@@ -861,7 +852,7 @@ function setCity(c) { S.city = c; DB.set('city', c); $$('.cityName').forEach(e =
 const A = {
   ribbon: () => { $('#ribbon').remove(); DB.set('ribbonOff', 1); },
   drawer: () => openDrawer(), closeL: () => closeL(), search: () => openSearch(), sclear: () => { $('#sq').value = ''; drawSearch(); $('#sq').focus(); }, sfill: el => { $('#sq').value = el.dataset.v; drawSearch(); },
-  mic: () => toast('Voice search (English, Hindi, Marathi) connects in production'),
+  mic: () => toast('Voice search is coming soon'),
   city: el => { const w = el.parentElement, ex = w.querySelector('.city-menu'); $$('.city-menu').forEach(x => x.remove()); if (ex) return; const m = document.createElement('div'); m.className = 'city-menu'; m.innerHTML = CITIES.map(c => `<button class="${S.city === c ? 'on' : ''}" data-act="setcity" data-v="${c}">${c}</button>`).join(''); w.appendChild(m); },
   setcity: el => { $$('.city-menu').forEach(x => x.remove()); setCity(el.dataset.v); },
   citylink: (el, e) => { e.preventDefault(); S.f = defF(); S.city = el.dataset.city; DB.set('city', S.city); $$('.cityName').forEach(x => x.textContent = S.city); go('buy'); },
@@ -903,7 +894,7 @@ const A = {
   ride: el => openRide(el.dataset.id),
   rv: el => { S._ride[el.dataset.k] = el.dataset.v; el.parentElement.querySelectorAll('[data-act=rv]').forEach(c => c.classList.toggle('on', c === el)); },
   reserve: el => openReserve(el.dataset.id),
-  pay: async el => { el.disabled = true; el.textContent = 'Opening payment…'; const r = await API.reserve(+el.dataset.id, 0); $('#rsvBody').innerHTML = okBox('Reservation started', `Reference <b>${r.id}</b>. In the live site the UPI / card payment screen opens here, and the bike is held once the token is paid.`, '<button class="btn btn-black" data-act="closeL">Done</button>'); },
+  pay: async el => { el.disabled = true; el.textContent = 'Opening payment…'; const r = await API.reserve(+el.dataset.id, 0); $('#rsvBody').innerHTML = okBox('Reservation started', `Reference <b>${r.id}</b>. Our team will call you to complete the token payment. The bike is held once it's paid.`, '<button class="btn btn-black" data-act="closeL">Done</button>'); },
   emi: el => openEMI(+el.dataset.price || 200000), eten: el => { S._ten = +el.dataset.v; $$('#eTen .chip').forEach(c => c.classList.toggle('on', c === el)); calcEMI(); },
   rc: () => layer(`${mhead('RC transfer status')}<form class="m-body" data-form="rc" novalidate><div class="field"><label for="rcReg">Registration number</label>${plate('rcReg')}</div><button class="btn btn-black btn-block" type="submit">Check status</button><div id="rcOut"></div></form>`, 'modal narrow', 'RC status'),
   jump: el => document.getElementById('v-' + el.dataset.t)?.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' }),
@@ -913,7 +904,7 @@ const A = {
   revf: el => { const v = el.dataset.v; $$('#revF .chip').forEach(c => c.classList.toggle('on', c === el)); $$('#revList .rev').forEach(r => r.hidden = !(v === 'All' || (v === 'Buyers' && r.dataset.kind === 'Bought') || (v === 'Sellers' && r.dataset.kind === 'Sold') || (v === 'Videos' && r.dataset.kind === 'Video'))); },
   intent: el => $$('[data-act=intent]').forEach(c => { c.classList.toggle('on', c === el); c.setAttribute('aria-checked', c === el); }),
   blogcat: el => { renderBlog(el.dataset.v); armReveal(); },
-  post: el => { const g = GUIDES[+el.dataset.i]; layer(`${mhead(esc(g.t))}<div class="m-body">${sceneImg(MEDIA.blog[+el.dataset.i % MEDIA.blog.length], '', 1200, 'post-hero')}<span class="eyebrow">${g.c} · ${g.m} min read</span><p class="muted">The full article loads from the headless CMS (or the current WordPress blog) with its original URL kept for SEO.</p><a class="btn btn-red" href="#${g.c === 'Selling' ? 'sell' : 'buy'}">${g.c === 'Selling' ? 'Get your price' : 'Browse bikes'}</a></div>`, 'modal narrow', g.t); },
+  post: el => { const g = GUIDES[+el.dataset.i]; layer(`${mhead(esc(g.t))}<div class="m-body">${sceneImg(MEDIA.blog[+el.dataset.i % MEDIA.blog.length], '', 1200, 'post-hero')}<span class="eyebrow">${g.c} · ${g.m} min read</span><a class="btn btn-red" href="#${g.c === 'Selling' ? 'sell' : 'buy'}">${g.c === 'Selling' ? 'Get your price' : 'Browse bikes'}</a></div>`, 'modal narrow', g.t); },
   copy: el => { const v = el.dataset.v; try { navigator.clipboard.writeText(v).then(() => toast('Copied ' + v), () => toast(v)); } catch (e) { toast(v); } },
   toast: (el, e) => { e && e.preventDefault(); toast(el.dataset.msg); },
   go: el => { if (el.closest('.chat') && matchMedia('(max-width:600px)').matches) A.chatclose(); go(el.dataset.v); },
@@ -930,13 +921,13 @@ const A = {
   s2: () => { const s = S.sell, ok = s.owners && s.cond.start && s.cond.acc && s.cond.tyre; $('#e2').hidden = !!ok; if (ok) { s.step = 3; renderQ(); track('sell_step', { step: 2 }); } },
   rmphoto: el => { S.sell.photos.splice(+el.dataset.i, 1); renderQ(); },
   sback: () => { S.sell.step--; S.sell.otp = false; renderQ(); },
-  resend: async () => { await API.sendOtp(S.sell.mobile); toast('OTP sent again (demo)'); },
+  resend: async () => { await API.sendOtp(S.sell.mobile); toast('OTP sent again'); },
   s3: async el => {
     const s = S.sell; s.name = $('#sName').value.trim(); s.mobile = $('#sMob').value.trim(); const e = $('#e3');
     if (!s.name || !mobOk(s.mobile)) { e.textContent = 'Enter your name and a 10-digit Indian mobile number.'; e.hidden = false; return; }
     if (!$('#sCons').checked) { e.textContent = 'Please agree to be contacted so we can share your price.'; e.hidden = false; return; }
     el.disabled = true;
-    if (!s.otp) { await API.sendOtp(s.mobile); s.otp = true; renderQ(); toast('OTP sent to +91 ' + s.mobile + ' (demo: any 4 digits)'); $('#sOtp')?.focus(); return; }
+    if (!s.otp) { await API.sendOtp(s.mobile); s.otp = true; renderQ(); toast('OTP sent to +91 ' + s.mobile + ''); $('#sOtp')?.focus(); return; }
     try { await API.verifyOtp(s.mobile, $('#sOtp').value); } catch (err) { e.textContent = err.message; e.hidden = false; el.disabled = false; return; }
     s.verified = true; s.step = 4; s.est = null; renderQ();
     if (!S.user) { S.user = { name: s.name, mobile: s.mobile }; DB.set('user', S.user); drawAcc(); }
@@ -949,7 +940,7 @@ const A = {
     el.disabled = true; el.textContent = 'Booking…';
     const vehicle = s.noReg ? `${s.brand} ${s.model} ${s.year}` : s.reg;
     const r = await API.bookInspection({ vehicle, name: s.name, mobile: s.mobile, city: S.city, where: s.where, date: s.date, slot: s.slot, estimate: `${inr(s.est.lo)}–${inr(s.est.hi)}`, leadId: s.leadId });
-    s.bookingId = r.id; s.step = 5; s.done = true; renderQ(); toast('Inspection booked. Confirmation sent on WhatsApp (demo).');
+    s.bookingId = r.id; s.step = 5; s.done = true; renderQ(); toast('Inspection booked. Confirmation sent on WhatsApp.');
   },
   snew: () => { S.sell = Object.assign(blankSell(), { name: S.user?.name || '', mobile: S.user?.mobile || '' }); renderQ(); },
   // chat
@@ -1017,20 +1008,20 @@ document.addEventListener('submit', async e => {
     const b = byId(r.id), rec = await API.bookTestRide({ bikeId: b.id, name, mobile: mob, where: r.where, date: r.date, slot: r.slot, city: b.city });
     API.createLead({ type: 'buy_enquiry', name, mobile: mob, city: b.city, detail: `Test ride ${b.name} · ${r.date} ${r.slot} · ${r.where}` });
     if (!S.user) { S.user = { name, mobile: mob }; DB.set('user', S.user); drawAcc(); }
-    form.innerHTML = okBox('Test ride booked', `${esc(b.name)} · ${r.date}, ${r.slot} · ${r.where === 'Home' ? 'at your home' : 'at our hub'}. Reference <b>${rec.id}</b>. Confirmation on WhatsApp (demo).`, `<div class="two-btn" style="width:100%"><button class="btn btn-line" data-act="closeL">Done</button><button class="btn btn-red" data-act="emi" data-price="${b.price}">Check EMI</button></div>`);
+    form.innerHTML = okBox('Test ride booked', `${esc(b.name)} · ${r.date}, ${r.slot} · ${r.where === 'Home' ? 'at your home' : 'at our hub'}. Reference <b>${rec.id}</b>. Confirmation sent on WhatsApp.`, `<div class="two-btn" style="width:100%"><button class="btn btn-line" data-act="closeL">Done</button><button class="btn btn-red" data-act="emi" data-price="${b.price}">Check EMI</button></div>`);
   }
   if (f === 'login') {
     const err = $('#eL'), n = $('#lName').value.trim(), m = $('#lMob').value.trim();
     if (!n || !mobOk(m)) { err.textContent = 'Enter your name and a 10-digit Indian mobile number.'; err.hidden = false; return; }
     if (!$('#lCons').checked) { err.textContent = 'Consent is needed to create your account.'; err.hidden = false; return; }
-    if ($('#lOtpF').hidden) { btn.disabled = true; await API.sendOtp(m); btn.disabled = false; $('#lOtpF').hidden = false; btn.textContent = 'Verify & log in'; err.hidden = true; $('#lOtp').focus(); toast('OTP sent (demo: any 4 digits)'); return; }
+    if ($('#lOtpF').hidden) { btn.disabled = true; await API.sendOtp(m); btn.disabled = false; $('#lOtpF').hidden = false; btn.textContent = 'Verify & log in'; err.hidden = true; $('#lOtp').focus(); toast('OTP sent'); return; }
     try { await API.verifyOtp(m, $('#lOtp').value); } catch (x) { err.textContent = x.message; err.hidden = false; return; }
     S.user = { name: n, mobile: m }; DB.set('user', S.user); drawAcc(); openAccount();
   }
   if (f === 'rc') {
     const v = $('#rcReg').value; if (!regOk(v)) { toast('Enter a registration number'); return; }
     $('#rcOut').innerHTML = '<p class="hint">Checking…</p>'; const r = await API.rcStatus(normReg(v));
-    $('#rcOut').innerHTML = `<p class="hint">${esc(r.reg)} · sample status</p><ol class="track">${r.steps.map(([l, d]) => `<li class="${d ? 'done' : ''}">${l}<span>${d ? 'Done' : 'Pending'}</span></li>`).join('')}</ol>`;
+    $('#rcOut').innerHTML = `<p class="hint">${esc(r.reg)}</p><ol class="track">${r.steps.map(([l, d]) => `<li class="${d ? 'done' : ''}">${l}<span>${d ? 'Done' : 'Pending'}</span></li>`).join('')}</ol>`;
   }
 });
 /* swipe for quick view / lightbox on touch */

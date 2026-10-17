@@ -10,8 +10,8 @@
   --line:#E3DEDE;
   --muted:#5F5858;      /* 7:1 on white */
   --on-black-muted:#B9B1B1;
-  --font:"IBM Plex Sans","IBM Plex Sans Devanagari",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; /* swap for the live speedioo.com family */
-  --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+  --font:"Inter","Noto Sans Devanagari",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:var(--font);
   --fs-xs:12px;--fs-sm:14px;--fs-md:16px;--fs-lg:19px;--fs-xl:clamp(22px,2.6vw,28px);--fs-2xl:clamp(28px,4.6vw,46px);
   --r:10px;--r-lg:16px;--pill:999px;
   --shadow:0 10px 30px rgba(15,14,14,.14);
@@ -933,3 +933,57 @@ select.input{-webkit-appearance:none;appearance:none;background:var(--white) url
 @media (max-width:600px){.sx-steps span{display:none}.sx-cap p{font-size:var(--fs-md)}.sx-clock strong{font-size:16px}}
 
 @media (max-width:600px){.ribbon .wrap{flex-wrap:nowrap;align-items:center}.ribbon .wrap>span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}}
+
+/* =========================================================
+   v4 · Spinny-style typography: one clean UI sans (Inter),
+   semibold headings, sentence-case grey labels, no mono
+   ========================================================= */
+:root{
+  --font:"Inter","Noto Sans Devanagari",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --mono:var(--font);
+  --fs-xs:12px;--fs-sm:14px;--fs-md:16px;--fs-lg:18px;--fs-xl:clamp(22px,2.6vw,28px);--fs-2xl:clamp(28px,4.2vw,40px);
+}
+body{font-family:var(--font);font-size:15px;line-height:1.55;font-feature-settings:"cv11" 1,"ss03" 1}
+h1,h2,h3{letter-spacing:-.02em;line-height:1.2}
+h1,h2{font-weight:700}
+h3,strong,b,th{font-weight:600}
+.sec-head h2{font-size:var(--fs-xl)}
+.hero h1{font-size:clamp(32px,5vw,56px);font-weight:700;letter-spacing:-.03em;line-height:1.08}
+@media (max-width:760px){.hero h1{font-size:clamp(30px,8.6vw,40px)}}
+.hero .sub{font-size:17px;line-height:1.55}
+.price{font-weight:700;letter-spacing:-.01em}
+.btn{font-weight:600;letter-spacing:-.005em}
+.logo{letter-spacing:-.03em}
+
+/* labels: sentence case, regular tracking, same family as body */
+.eyebrow,.fcell label,.fcol h4,.hl span,.crumb,.cmp-table th,.khl span,.field>label,.field>.lab,.stats-sm span,.kpis span,
+.range-lab,.fine,.emi,.save-line,.saved,.sx-time,.sx-cap-t,.helpline,.secure span,.badge,.tag,.soon,.sx-clock,.dots,.qv-foot .eyebrow,.drow .eyebrow,.lb-top{
+  font-family:var(--font);text-transform:none;letter-spacing:0}
+.eyebrow{font-size:13px;font-weight:500;color:var(--muted)}
+.eyebrow.on-dark{color:var(--on-black-muted)}
+.fcell label,.field>label,.field>.lab{font-size:13px;font-weight:500;color:var(--muted)}
+.fcol h4{font-size:14px;font-weight:600;color:var(--white)}
+.khl span,.hl span{font-size:12px;color:var(--muted)}
+.crumb{font-size:13px}
+.cmp-table th{font-size:13px;font-weight:500}
+.fine,.hint,.saved{font-size:13px}
+.emi{font-size:13px}
+.save-line{font-size:13px;color:var(--muted)}
+.save-line b{color:var(--red);font-weight:600}
+.badge{font-weight:500}
+.sx-cap-t{font-weight:600}
+.sx-clock{font-size:13px}
+.helpline{font-size:12px}
+.helpline strong{font-weight:600}
+/* number plate: bold UI sans with plate-like spacing */
+.plate input{font-family:var(--font);font-weight:600;letter-spacing:.08em;text-transform:uppercase;font-variant-numeric:tabular-nums}
+.plate .ind{font-family:var(--font)}
+/* gauge + stats */
+.g-num{font:700 40px var(--font);letter-spacing:-.02em}
+.g-lab{font:500 13px var(--font);letter-spacing:0}
+.g-stop text{font-family:var(--font)}
+.stats strong{letter-spacing:-.03em}
+.tile small,.tc-lab small,.srow .muted{font-family:var(--font)}
+.tc-lab strong{font-weight:600}
+.how-steps strong{font-weight:600}
+.otp{font-family:var(--font);letter-spacing:.4em}

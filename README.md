@@ -47,7 +47,8 @@ Leads carry `utm_*` and `gclid` captured from the landing URL for Google Ads att
 Analytics: paste the GTM / GA4 snippet in `index.html`; events already pushed include `page_view`, `view_item_list`, `view_item`, `select_item`, `add_to_wishlist`, `search`, `generate_lead`, `valuation_shown`, `book_inspection`, `book_test_ride`, `begin_checkout`, `chat_open`.
 
 ## Before launch
-- **Font:** replace the `--font` token in `styles.css` with the family from the live speedioo.com CSS.
+- **Font:** the site uses Inter (Spinny-style clean UI sans) via the `--font` token at the top of `styles.css`. To use a different family, change that one token and the Google Fonts link in `index.html`.
+- **New on-road prices:** each bike's `onRoad` value in `assets/js/data.js` is the current new on-road price in the listing's city (Oct 2026, from BikeWale, Autocar India, Shriram Finance and CarHP). The detail page and quick view show it with "You save". Update it when prices change or when the backend provides it.
 - **Media:** photos and videos are hot-linked from Pexels (free licence, pexels.com/license) and are stand-ins. Replace with Speedioo's own inspection photos and customer videos (store on a CDN such as Cloudinary or Vercel Blob). If a photo fails to load, a drawn illustration is shown.
 - **Placeholders:** everything in red `[brackets]` needs a real value or must be removed (ratings, counts, warranty, token amount, lender names).
 - **SEO:** hash routes are fine for a front-end build. For indexable city/brand/model pages, move to Next.js (SSR/SSG) when the API is live.
